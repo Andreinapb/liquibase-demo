@@ -11,12 +11,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Show Liquibase Version
+      - name: Show Liquibase Version (log to file)
         run: |
-          echo "=== LIQUIBASE VERSION ==="
-          C:\liquibase\liquibase.bat --version
+          echo "=== LIQUIBASE VERSION ===" | Tee-Object -FilePath "C:\proyectos\liquibase-demo\logs\liquibase.log" -Append
+          C:\liquibase\liquibase.bat --version | Tee-Object -FilePath "C:\proyectos\liquibase-demo\logs\liquibase.log" -Append
 
-      - name: Show Liquibase Status
+      - name: Show Liquibase Status (log to file)
         run: |
-          echo "=== LIQUIBASE STATUS ==="
-          C:\liquibase\liquibase.bat --defaultsFile="C:\proyectos\liquibase-demo\liquibase.properties" --classpath="C:\proyectos\liquibase-demo\drivers\postgresql-42.7.4.jar" status --verbose
+          echo "=== LIQUIBASE STATUS ===" | Tee-Object -FilePath "C:\proyectos\liquibase-demo\logs\liquibase.log" -Append
+          C:\liquibase\liquibase.bat --defaultsFile="C:\proyectos\liquibase-demo\liquibase.properties" --classpath="C:\proyectos\liquibase-demo\drivers\postgresql-42.7.4.jar" status --verbose | Tee-Object -FilePath "C:\proyectos\liquibase-demo\logs\liquibase.log" -Append
