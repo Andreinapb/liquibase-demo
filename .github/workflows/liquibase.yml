@@ -1,0 +1,20 @@
+name: Liquibase Local Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  liquibase:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Liquibase STATUS
+        run: |
+          C:\liquibase\liquibase.bat --defaultsFile="C:\proyectos\liquibase-demo\liquibase.properties" --classpath="C:\proyectos\liquibase-demo\drivers\postgresql-42.7.4.jar" status --verbose
+
+      - name: Liquibase UPDATE
+        run: |
+          C:\liquibase\liquibase.bat --defaultsFile="C:\proyectos\liquibase-demo\liquibase.properties" --classpath="C:\proyectos\liquibase-demo\drivers\postgresql-42.7.4.jar" update
